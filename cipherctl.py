@@ -3,6 +3,7 @@
 import argparse
 import re
 import string
+import sys
 import logging as logger
 
 DEBUG = False
@@ -229,7 +230,12 @@ def run():
 	args = parser.parse_args()
 
 	vars_dict = vars(args)
-	which_parser = vars_dict["which"]
+
+	try:
+		which_parser = vars_dict["which"]
+	except Exception as err:
+		parser.print_help(sys.stderr)
+		sys.exit(1)
 
 
 	if args.debug:
