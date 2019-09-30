@@ -99,6 +99,7 @@ def rot13_cipher(message):
 
 def vigenere_cipher(message, keyword, action):
 	""" Method is used for encoding / decoding a message using the vigenere cipher """
+	global DEBUG
 
 	def _alphabet_table(letter):
 		""" sub method to perform character to nbr conversions """
@@ -137,15 +138,18 @@ def vigenere_cipher(message, keyword, action):
 
 			rotation = _alphabet_table(keyword[starting_index])
 
-			if not letter in lookup_table:
-				cipher.append(letter)
-			elif letter.isalpha():
-				cipher.append(_rotate_(letter, rotation))
+			if letter != " ":
+				if not letter in lookup_table:
+					cipher.append(letter)
+				elif letter.isalpha():
+					cipher.append(_rotate_(letter, rotation))
 
-			if starting_index == (len(keyword) - 1):
-				starting_index = 0
+				if starting_index == (len(keyword) - 1):
+					starting_index = 0
+				else:
+					starting_index += 1
 			else:
-				starting_index += 1
+				cipher.append(" ")
 
 	elif action == "decode":
 		# We loop through our message, getting individual letters and converting them to our numeric value
@@ -155,11 +159,15 @@ def vigenere_cipher(message, keyword, action):
 
 			if letter != " ":
 				subtracted_val = lookup_table[letter] - rotation
-				print(letter, rotation)
+
+				if DEBUG:
+					logger.debug("The current letter and rotation number is: {},{}".format(letter, rotation))
+
 				if subtracted_val < 0:
 					subtracted_val = subtracted_val + 26
 
-				print(subtracted_val)
+				if DEBUG:
+					logger.debug("The substracted value is now: {}".format(subtracted_val))
 
 				cipher.append(reverse_table[subtracted_val])
 
@@ -182,7 +190,7 @@ def run():
 
 	# These parser objects control the main parser
 	parser = argparse.ArgumentParser(description='The cipherctl utility allows you to encode or decode in various ciphers')	
-	parser.add_argument('--debug', help="Enables verbose logging for dsoargoctl commands", required=False, action="store_true") 
+	parser.add_argument('--debug', help="Enables verbose logging for cipherctl commands", required=False, action="store_true") 
 	#parser.add_argument("-t", "--type", required=True, type=str, choices=["atbash","rot13","caesar","vigenere"])
 
 	# Create the parent subparser to be used for other actions
@@ -191,13 +199,13 @@ def run():
 	# create the subparser for our atbash command
 	atbash = subparsers.add_parser("atbash", help="Atbash cipher actions", parents=[parser], add_help=False)
 	atbash.set_defaults(which="atbash")
-	atbash.add_argument("-m", "--message", required=False, type=str)
+	atbash.add_argument("-m", "--message", required=True, type=str)
 
 
 
 	# create the subparser for our caesar cipher command
 	caesar = subparsers.add_parser("caesar", help="Caesar cipher actions", parents=[parser], add_help=False)
-	caesar.add_argument("-a", "--action", required=True, type=str)
+	caesar.add_argument("-a", "--action", required=True, type=str, choices=["encode","decode"])
 	caesar.add_argument("-m", "--message", required=True, type=str)
 	caesar.add_argument('-s','--shift', help="The amount of shifts to use", required=True, type=int)
 	caesar.set_defaults(which="caesar")
@@ -211,7 +219,7 @@ def run():
 
 	# create the subparser for our vigenere cipher command
 	vigenere = subparsers.add_parser("vigenere", help="Vigenere cipher actions", parents=[parser], add_help=False)
-	vigenere.add_argument("-a", "--action", required=True, type=str)
+	vigenere.add_argument("-a", "--action", required=True, type=str, choices=["encode","decode"])
 	vigenere.add_argument("-m", "--message", required=True, type=str)
 	vigenere.add_argument("-k", "--keyword", required=True, type=str)
 	vigenere.set_defaults(which="vigenere")
