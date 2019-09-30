@@ -86,3 +86,6 @@ ZEWEG OOCEV
 ./cipherctl vigenere -a decode -m "ZEWEG OOCEV" -k "salts"
 HELLO WORLD
 ```
+
+## Contributing
+If you wish to contribute, please feel free to let me know. I'd be more than happy to let you.
