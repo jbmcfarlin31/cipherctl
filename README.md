@@ -1,7 +1,9 @@
 # cipherctl
 A cipher tool that encodes and decodes Atbash, ROT-13, Caesar Cipher and Vigenere Cipher.
 
-## Installation - CURRENTLY ONLY Linux
+## Installation
+
+### Linux Distro's
 You can install `cipherctl` by simply doing the following:
 ```bash
 $ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl
@@ -9,6 +11,23 @@ $ chmod +x cipherctl
 
 $ ./cipherctl
 ```
+
+### MacOSx
+```bash
+$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl.app.zip
+$ unzip cipherctl.app.zip
+$ cd cipherctl.app/Contents/MacOS
+$ chmod +x cipherctl
+$ ./cipherctl
+```
+
+<!--### Windows - NOT TESTED YET
+```
+// using powershell
+C:\Temp> wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl
+C:\Temp> python cipherctl
+```
+-->
 
 ## General Help Usage
 ```bash
