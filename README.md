@@ -3,8 +3,9 @@ A cipher tool that encodes and decodes Atbash, ROT-13, Caesar Cipher and Vigener
 
 ## Installation
 
-### Linux Distro's
 You can install `cipherctl` by simply doing the following:
+
+### Linux Distro's
 ```bash
 $ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl
 $ chmod +x cipherctl
