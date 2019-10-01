@@ -20,7 +20,12 @@ $ ./cipherctl
 
 ### MacOSx
 ```bash
+$ $ release=$(curl -s https://api.github.com/repos/jbmcfarlin31/cipherctl/releases/latest | grep "browser_download_url.*zip" | cut -d '"' -f 4 | cut -d "/" -f 8)
+$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/$release/cipherctl.app.zip
+
+# Or manually grab it via
 $ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl.app.zip
+
 $ unzip cipherctl.app.zip
 $ cd cipherctl.app/Contents/MacOS
 $ chmod +x cipherctl
