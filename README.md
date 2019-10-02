@@ -43,16 +43,20 @@ C:\Temp> python cipherctl
 ## General Help Usage
 ```bash
 cipherctl -h
-usage: cipherctl.py [-h] [--debug] {atbash,caesar,rot13,vigenere} ...
+usage: cipherctl.py [-h] [--debug]
+                    {atbash,caesar,rot5,rot13,rot18,rot47,vigenere} ...
 
 The cipherctl utility allows you to encode or decode in various ciphers
 
 positional arguments:
-  {atbash,caesar,rot13,vigenere}
+  {atbash,caesar,rot5,rot13,rot18,rot47,vigenere}
                         ciphers
     atbash              Atbash cipher actions
     caesar              Caesar cipher actions
+    rot5                ROT-5 cipher actions
     rot13               ROT-13 cipher actions
+    rot18               ROT-18 cipher actions
+    rot47               ROT-47 cipher actions
     vigenere            Vigenere cipher actions
 
 optional arguments:
