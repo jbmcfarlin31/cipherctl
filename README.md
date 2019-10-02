@@ -68,7 +68,10 @@ Optional debugging can be enabled for verbose output:
 ## How to Use 
 The cipherctl tool can be used to encode or decode in the following formats:
 - Atbash
+- ROT-5
 - ROT-13
+- ROT-18
+- ROT-47 (beta)
 - Caesar Cipher
 - Vigenere Cipher
 
