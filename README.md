@@ -95,6 +95,17 @@ OLSSV DVYSK
 HELLO WORLD
 ```
 
+### ROT-5
+```bash
+# For encrypting, you can do:
+./cipherctl rot5 -m "123 456"
+678 901
+
+# For decrypting
+./cipherctl rot13 -m "678 901"
+123 456
+```
+
 ### ROT-13
 ```bash
 # For encrypting, you can do:
@@ -104,6 +115,28 @@ URYYB JBEYQ
 # For decrypting
 ./cipherctl rot13 -m "URYYB JBEYQ"
 HELLO WORLD
+```
+
+### ROT-18
+```bash
+# For encrypting
+./cipherctl rot18 -m "hello world123"
+URYYB JBEYQ678
+
+# For decrypting
+./cipherctl rot18 -m "URYYB JBEYQ678"
+HELLO WORLD123
+```
+
+### ROT-47 - BETA
+```bash
+# For encrypting, you can do:
+./cipherctl rot47 -m "hello world123"
+96==@ H@C=5`ab
+
+# For decrypting
+./cipherctl rot13 -m "96==@ H@C=5`a"
+hello world123
 ```
 
 ### Vigenere Cipher

@@ -90,12 +90,91 @@ def rot13_cipher(message):
 			try:
 				cipher += lookup_table[letter]
 			except:
-				cipher += reverse_table[letter]
+				try:
+					cipher += reverse_table[letter]
+				except Exception as err:
+					print("Oops, looks like you aren't using letters. Please try again.")
+					sys.exit(1)
 		else:
 			cipher += " "
 
 
 	return cipher
+
+def rot5_cipher(message):
+	""" Method is responsible for encoding / decoding a message in rot-5 """
+
+	# our lookup table for converting ROT-5 values
+	lookup_table = {"1": "6", "2": "7", "3": "8", "4": "9", "5": "0"}
+
+	# our reverse lookup table for converting backwards for decoding
+	reverse_table = {v: k for k, v in lookup_table.items()}
+
+	cipher = ""
+
+	# We loop through the message, converting our letters
+	for letter in message:
+
+		if letter != " ":
+			try:
+				cipher += lookup_table[str(letter)]
+			except:
+				try:
+					cipher += reverse_table[str(letter)]
+				except:
+					print("Oops, looks like you aren't using numbers. Please try again.")
+					sys.exit(1)
+		else:
+			cipher += " "
+
+
+	return cipher
+
+def rot18_cipher(message):
+	""" Method is responsible for encoding / decoding a message in rot-18 """
+
+	# our lookup table for converting ROT-18 values
+	lookup_table = {"A": "N", "B": "O", "C": "P", "D": "Q", "E": "R", "F": "S",
+	"G": "T", "H": "U", "I": "V", "J": "W", "K": "X", "L": "Y", "M": "Z", "1": "6", "2": "7", "3": "8", "4": "9", "5": "0"}
+
+	# our reverse lookup table for converting backwards for decoding
+	reverse_table = {v: k for k, v in lookup_table.items()}
+
+	cipher = ""
+
+	# We loop through the message, converting our letters
+	for letter in message.upper():
+
+		
+		if letter != " ":
+			try:
+				cipher += lookup_table[letter]
+			except:
+				cipher += reverse_table[letter]
+		else:
+			cipher += " "
+
+	return cipher
+
+def rot47_cipher(message):
+	""" Method is responsible for encoding / decoding a message in rot-47 """
+
+	cipher = []
+
+	# We loop through the message, converting our letters
+	for letter in message:
+		
+		if letter != " ":
+			ascii_code = ord(letter)
+
+			if ascii_code >= 33 and ascii_code <= 126:
+				cipher.append(chr(33 + ((ascii_code + 14) % 94)))
+			else:
+				cipher.append(letter)
+		else:
+			cipher += " "
+
+	return "".join(cipher)
 
 
 def vigenere_cipher(message, keyword, action):
@@ -202,8 +281,6 @@ def run():
 	atbash.set_defaults(which="atbash")
 	atbash.add_argument("-m", "--message", required=True, type=str)
 
-
-
 	# create the subparser for our caesar cipher command
 	caesar = subparsers.add_parser("caesar", help="Caesar cipher actions", parents=[parser], add_help=False)
 	caesar.add_argument("-a", "--action", required=True, type=str, choices=["encode","decode"])
@@ -211,12 +288,25 @@ def run():
 	caesar.add_argument('-s','--shift', help="The amount of shifts to use", required=True, type=int)
 	caesar.set_defaults(which="caesar")
 
-
+	# create the subparser for our rot-5 cipher command
+	rot5 = subparsers.add_parser("rot5", help="ROT-5 cipher actions", parents=[parser], add_help=False)
+	rot5.add_argument("-m", "--message", required=True, type=str)
+	rot5.set_defaults(which="rot5")
 
 	# create the subparser for our rot-13 cipher command
 	rot13 = subparsers.add_parser("rot13", help="ROT-13 cipher actions", parents=[parser], add_help=False)
 	rot13.add_argument("-m", "--message", required=True, type=str)
 	rot13.set_defaults(which="rot13")
+
+	# create the subparser for our rot-18 cipher command
+	rot18 = subparsers.add_parser("rot18", help="ROT-18 cipher actions", parents=[parser], add_help=False)
+	rot18.add_argument("-m", "--message", required=True, type=str)
+	rot18.set_defaults(which="rot18")
+
+	# create the subparser for our rot-47 cipher command
+	rot18 = subparsers.add_parser("rot47", help="ROT-47 cipher actions", parents=[parser], add_help=False)
+	rot18.add_argument("-m", "--message", required=True, type=str)
+	rot18.set_defaults(which="rot47")
 
 	# create the subparser for our vigenere cipher command
 	vigenere = subparsers.add_parser("vigenere", help="Vigenere cipher actions", parents=[parser], add_help=False)
@@ -246,22 +336,28 @@ def run():
 
 
 	if args.message:
-		if re.search(r"^[a-zA-Z ]+$", args.message):
-			if which_parser == "atbash":
-				result = atbash_cipher(args.message)
-			elif which_parser == "caesar":
-				result = caesar_cipher(args.message, args.shift, args.action)
-			elif which_parser == "rot13":
-				result = rot13_cipher(args.message)
-			elif which_parser == "vigenere":
-				result = vigenere_cipher(args.message, args.keyword, args.action)
-			else:
-				logger.warn("no cipher action was found... exiting.")
-				sys.exit(0)
-
-			print(result)
+		#if re.search(r"^[a-zA-Z 0-9]+$", args.message):
+		if which_parser == "atbash":
+			result = atbash_cipher(args.message)
+		elif which_parser == "caesar":
+			result = caesar_cipher(args.message, args.shift, args.action)
+		elif which_parser == "rot5":
+			result = rot5_cipher(args.message)
+		elif which_parser == "rot13":
+			result = rot13_cipher(args.message)
+		elif which_parser == "rot18":
+			result = rot18_cipher(args.message)
+		elif which_parser == "rot47":
+			result = rot47_cipher(args.message)
+		elif which_parser == "vigenere":
+			result = vigenere_cipher(args.message, args.keyword, args.action)
 		else:
-			print("Oops, an invalid character was entered. Please try again.")
+			logger.warn("no cipher action was found... exiting.")
+			sys.exit(0)
+
+		print(result)
+		# else:
+		# 	print("Oops, an invalid character was entered. Please try again.")
 
 
 if __name__ == '__main__':
