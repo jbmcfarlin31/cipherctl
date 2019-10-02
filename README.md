@@ -1,5 +1,5 @@
 # cipherctl
-A cipher tool that encodes and decodes Atbash, ROT-13, Caesar Cipher and Vigenere Cipher.
+A cipher tool that encodes and decodes in some of the most popular ciphers.
 
 ## Installation
 
