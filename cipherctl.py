@@ -31,7 +31,11 @@ def atbash_cipher(message):
 
 		# We make sure to check for spaces, if none exist we encode/decode otherwise we add a space
 		if letter != " ":
-			cipher += lookup_table[letter]
+			try:
+				cipher += lookup_table[letter]
+			except Exception as e:
+				print("Oops, looks like you aren't using letters. Please try again.")
+				sys.exit(1)
 		else:
 			cipher += " "
 
@@ -71,6 +75,7 @@ def caesar_cipher(message, shift, action):
 				logger.warn("There is no action provided")
 
 		else:
+			# TODO: Add regex support for performing a check against punctuation characters, such as ", . ! ? - "...etc.
 			cipher += " "
 
 	return cipher
@@ -276,7 +281,6 @@ def run():
 	# These parser objects control the main parser
 	parser = argparse.ArgumentParser(description='The cipherctl utility allows you to encode or decode in various ciphers')	
 	parser.add_argument('--debug', help="Enables verbose logging for cipherctl commands", required=False, action="store_true") 
-	#parser.add_argument("-t", "--type", required=True, type=str, choices=["atbash","rot13","caesar","vigenere"])
 
 	# Create the parent subparser to be used for other actions
 	subparsers = parser.add_subparsers(help="ciphers")
