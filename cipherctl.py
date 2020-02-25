@@ -8,6 +8,9 @@ import sys
 import logging as logger
 
 DEBUG = False
+LOG_FORMAT = 'time="%(asctime)s" level=%(levelname)s msg="%(message)s"'
+logger.basicConfig(level=logger.DEBUG, format=LOG_FORMAT)
+
 
 def atbash_cipher(message):
 	""" Method is used for encoding or decoding the plaintext """
@@ -331,9 +334,8 @@ def run():
 
 	if args.debug:
 		DEBUG = True
-		logger.basicConfig(level=logger.DEBUG, format='%(asctime)s - %(message)s')
-		print(args)
-		print(vars(args))
+                logger.debug(args)
+                logger.debug(vars(args))
 
 
 	if args.message:
