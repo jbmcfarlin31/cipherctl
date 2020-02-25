@@ -7,6 +7,7 @@ import string
 import sys
 import logging as logger
 
+# Debugging configurations
 DEBUG = False
 LOG_FORMAT = 'time="%(asctime)s" level=%(levelname)s msg="%(message)s"'
 logger.basicConfig(level=logger.DEBUG, format=LOG_FORMAT)
