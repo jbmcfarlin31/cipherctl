@@ -334,8 +334,8 @@ def run():
 
 	if args.debug:
 		DEBUG = True
-                logger.debug(args)
-                logger.debug(vars(args))
+		logger.debug(args)
+		logger.debug(vars(args))
 
 
 	if args.message:
