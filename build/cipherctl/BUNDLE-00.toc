@@ -1,3 +1,0 @@
-([('cipherctl',
-   '/Users/jbmcfarlin/Gitlab/cipherctl/dist/cipherctl',
-   'EXECUTABLE')],)
