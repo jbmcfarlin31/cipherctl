@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['cipherctl.py'],
-             pathex=['/root/github.com/cipherctl'],
+             pathex=['/Users/jbmcfarlin/Gitlab/cipherctl'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -31,3 +31,7 @@ exe = EXE(pyz,
           upx_exclude=[],
           runtime_tmpdir=None,
           console=False )
+app = BUNDLE(exe,
+             name='cipherctl.app',
+             icon=None,
+             bundle_identifier=None)
