@@ -11,7 +11,7 @@ $ release=$(curl -s https://api.github.com/repos/jbmcfarlin31/cipherctl/releases
 $ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/$release/cipherctl
 
 # Or you can manually grab it
-$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl
+$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.1/cipherctl
 
 $ chmod +x cipherctl
 
@@ -24,7 +24,7 @@ $ release=$(curl -s https://api.github.com/repos/jbmcfarlin31/cipherctl/releases
 $ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/$release/cipherctl.app.zip
 
 # Or manually grab it via
-$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.0.0/cipherctl.app.zip
+$ wget https://github.com/jbmcfarlin31/cipherctl/releases/download/1.1/cipherctl.app.zip
 
 $ unzip cipherctl.app.zip
 $ cd cipherctl.app/Contents/MacOS
