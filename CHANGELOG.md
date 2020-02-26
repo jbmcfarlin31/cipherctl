@@ -15,7 +15,7 @@ Added functionality and OS support - there is no steps for upgrading. Simply dow
 
 - Added support for MacOSx
  
-## [1.0] - 2018-09-30
+## [1.0] - 2019-09-30
  
 ### Added
 
