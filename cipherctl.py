@@ -7,11 +7,16 @@ import string
 import sys
 import logging as logger
 
+from __version__ import VERSION
+
 # Debugging configurations
 DEBUG = False
 LOG_FORMAT = 'time="%(asctime)s" level=%(levelname)s msg="%(message)s"'
 logger.basicConfig(level=logger.DEBUG, format=LOG_FORMAT)
 
+def version():
+	""" Method prints the current version imported """
+	print("Version: {}".format(VERSION))
 
 def atbash_cipher(message):
 	""" Method is used for encoding or decoding the plaintext """
@@ -281,6 +286,8 @@ def run():
 	# These parser objects control the main parser
 	parser = argparse.ArgumentParser(description='The cipherctl utility allows you to encode or decode in various ciphers')	
 	parser.add_argument('--debug', help="Enables verbose logging for cipherctl commands", required=False, action="store_true") 
+	parser.add_argument("-v", "--version", help="Shows the current version of cipherctl", required=False, action="store_true")
+	parser.set_defaults(which="default")
 
 	# Create the parent subparser to be used for other actions
 	subparsers = parser.add_subparsers(help="ciphers")
@@ -342,30 +349,34 @@ def run():
 		logger.debug(args)
 		logger.debug(vars(args))
 
+	if args.version:
+		version()
 
-	if args.message:
-		#if re.search(r"^[a-zA-Z 0-9]+$", args.message):
-		if which_parser == "atbash":
-			result = atbash_cipher(args.message)
-		elif which_parser == "caesar":
-			result = caesar_cipher(args.message, args.shift, args.action)
-		elif which_parser == "rot5":
-			result = rot5_cipher(args.message)
-		elif which_parser == "rot13":
-			result = rot13_cipher(args.message)
-		elif which_parser == "rot18":
-			result = rot18_cipher(args.message)
-		elif which_parser == "rot47":
-			result = rot47_cipher(args.message)
-		elif which_parser == "vigenere":
-			result = vigenere_cipher(args.message, args.keyword, args.action)
-		else:
-			logger.warn("no cipher action was found... exiting.")
-			sys.exit(0)
+	# create our result variable
+	result = ""
 
+	if which_parser == "atbash":
+		result = atbash_cipher(args.message)
+	elif which_parser == "caesar":
+		result = caesar_cipher(args.message, args.shift, args.action)
+	elif which_parser == "rot5":
+		result = rot5_cipher(args.message)
+	elif which_parser == "rot13":
+		result = rot13_cipher(args.message)
+	elif which_parser == "rot18":
+		result = rot18_cipher(args.message)
+	elif which_parser == "rot47":
+		result = rot47_cipher(args.message)
+	elif which_parser == "vigenere":
+		result = vigenere_cipher(args.message, args.keyword, args.action)
+	elif which_parser == "default":
+		pass
+	else:
+		logger.warn("no cipher action was found... exiting.")
+		sys.exit(0)
+
+	if result != "":
 		print(result)
-		# else:
-		# 	print("Oops, an invalid character was entered. Please try again.")
 
 
 if __name__ == '__main__':
