@@ -2,7 +2,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
  
-## [1.1](https://github.com/jbmcfarlin31/cipherctl/releases/tag/v1.1) - 2019-10-02
+## [[1.1]](https://github.com/jbmcfarlin31/cipherctl/releases/tag/v1.1) - 2019-10-02
   
 Added functionality and OS support - there is no steps for upgrading. Simply download the new binary following the instructions on the root of this directory.
  
@@ -15,7 +15,7 @@ Added functionality and OS support - there is no steps for upgrading. Simply dow
 
 - Added support for MacOSx
  
-## [1.0.0](https://github.com/jbmcfarlin31/cipherctl/releases/tag/1.0.0) - 2019-09-30
+## [[1.0.0]](https://github.com/jbmcfarlin31/cipherctl/releases/tag/1.0.0) - 2019-09-30
  
 ### Added
 
